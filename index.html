@@ -35,7 +35,7 @@
             <a href="teacher-login.html" class="btn btn-outline">
                 <i class="ph ph-chalkboard-teacher"></i> Teacher Login
             </a>
-            <a href="#contact" class="btn btn-primary">Start Free Setup</a>
+            <a href="start-free-setup.html" class="btn btn-primary">Start Free Setup</a>
         </div>
         <a href="teacher-login.html" class="btn btn-outline btn-sm mobile-teacher-btn">
             <i class="ph ph-chalkboard-teacher"></i> Teacher Login
@@ -63,7 +63,7 @@
         <a href="teacher-login.html" class="btn btn-outline" style="justify-content:center;">
             <i class="ph ph-chalkboard-teacher"></i> Teacher Login
         </a>
-        <a href="#contact" class="btn btn-primary" style="justify-content:center;">Start Free Setup</a>
+        <a href="start-free-setup.html" class="btn btn-primary" style="justify-content:center;">Start Free Setup</a>
     </div>
 </div>
 
@@ -323,57 +323,6 @@
     </div>
 </section>
 
-<!-- ── Contact ── -->
-<section class="section-padding" id="contact">
-    <div class="container">
-        <div class="contact-wrapper">
-            <div class="contact-info">
-                <h2>Ready to digitize?</h2>
-                <p>Leave your details below and our team will get back to you within 24 hours.</p>
-                <div class="contact-details">
-                    <div class="contact-item">
-                        <i class="ph-fill ph-envelope-simple"></i>
-                        <div>
-                            <span>Email us</span>
-                            <strong>hello@pitthugram.com</strong>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="ph-fill ph-map-pin"></i>
-                        <div>
-                            <span>Visit us</span>
-                            <strong>Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, UP 201301</strong>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="contact-form-container">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" placeholder="John Doe" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="institute">Institute Name</label>
-                        <input type="text" id="institute" placeholder="Excel Coaching" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="john@example.com" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message (Optional)</label>
-                        <textarea id="message" rows="4" placeholder="Tell us what you're looking for..."></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">
-                        Request Free Setup <i class="ph ph-paper-plane-right"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- ── Footer ── -->
 <footer class="footer">
     <div class="container">
@@ -425,18 +374,6 @@ const mobileClose = document.getElementById('mobileClose');
 hamburger.addEventListener('click',   () => mobileNav.classList.add('open'));
 mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
-
-// Contact form
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const btn = this.querySelector('button[type=submit]');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-    setTimeout(() => {
-        btn.innerHTML = '<i class="ph ph-check"></i> Sent! We\'ll be in touch soon.';
-        btn.style.background = 'var(--success)';
-    }, 1000);
-});
 </script>
 </body>
 </html>
