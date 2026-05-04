@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Free Setup — Pitthugram</title>
+    <meta name="description" content="Get your coaching institute online in 24 hours. Start your free setup today.">
+    <link rel="icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .setup-page {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 1.5rem 4rem;
+            background: var(--bg-base);
+            position: relative;
+            overflow: hidden;
+        }
+        .setup-page::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(244,0,9,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .setup-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 900px;
+            width: 100%;
+            align-items: center;
+        }
+        .setup-left h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .setup-left h1 span { color: var(--primary); }
+        .setup-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .setup-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--primary-light);
+            border: 1px solid rgba(244,0,9,0.25);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.875rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+        .trust-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .trust-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .trust-list li i {
+            color: var(--success);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .setup-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .setup-card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.375rem;
+        }
+        .setup-card .subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        .required-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .required-note span { color: var(--primary); }
+        .field-label-row {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+        .field-label-row label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        .field-label-row .req { color: var(--primary); font-size: 0.9rem; line-height: 1; }
+        .input-icon-wrap {
+            position: relative;
+        }
+        .input-icon-wrap i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+        .input-icon-wrap input {
+            padding-left: 2.75rem !important;
+        }
+        .setup-submit {
+            width: 100%;
+            padding: 0.95rem;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--font-body);
+            margin-top: 0.5rem;
+        }
+        .setup-submit:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-red);
+        }
+        .setup-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-top: 1.5rem;
+            transition: var(--transition);
+        }
+        .back-link:hover { color: var(--text-primary); }
+        .success-state {
+            text-align: center;
+            padding: 1rem 0;
+            display: none;
+        }
+        .success-state .check-circle {
+            width: 72px;
+            height: 72px;
+            background: var(--success-light);
+            border: 1px solid rgba(16,185,129,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            font-size: 2rem;
+            color: var(--success);
+        }
+        .success-state h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .success-state p { color: var(--text-secondary); font-size: 0.9rem; }
+        @media (max-width: 768px) {
+            .setup-wrapper { grid-template-columns: 1fr; gap: 2.5rem; }
+            .setup-left { text-align: center; }
+            .setup-left h1 { font-size: 1.75rem; }
+            .trust-list { align-items: center; }
+            .setup-page { padding: 4rem 1.25rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<header class="navbar">
+    <div class="container nav-inner">
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Pitthugram">
+        </a>
+        <nav class="nav-links">
+            <a href="index.html#services">Services</a>
+            <a href="index.html#how-it-works">How it Works</a>
+            <a href="index.html#benefits">Benefits</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="index.html#about">About</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="teacher-login.html" class="btn btn-outline">
+                <i class="ph ph-chalkboard-teacher"></i> Teacher Login
+            </a>
+            <a href="start-free-setup.html" class="btn btn-primary">Start Free Setup</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <i class="ph ph-list"></i>
+        </button>
+    </div>
+</header>
+
+<!-- ── Mobile Nav ── -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Pitthugram" style="height:34px;"></a>
+        <button class="mobile-close" id="mobileClose"><i class="ph ph-x"></i></button>
+    </div>
+    <nav class="mobile-nav-links">
+        <a href="index.html#services">Services</a>
+        <a href="index.html#how-it-works">How it Works</a>
+        <a href="index.html#benefits">Benefits</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#about">About</a>
+    </nav>
+    <div class="mobile-nav-actions">
+        <a href="teacher-login.html" class="btn btn-outline" style="justify-content:center;">
+            <i class="ph ph-chalkboard-teacher"></i> Teacher Login
+        </a>
+        <a href="start-free-setup.html" class="btn btn-primary" style="justify-content:center;">Start Free Setup</a>
+    </div>
+</div>
+
+<!-- ── Setup Page ── -->
+<main class="setup-page">
+    <div class="setup-wrapper">
+
+        <!-- Left: Info -->
+        <div class="setup-left">
+            <div class="setup-badge">
+                <i class="ph-fill ph-gift"></i> Free Trial
+            </div>
+            <h1>Get Your Institute <span>Online in 24 Hours</span></h1>
+            <p>Join hundreds of coaching institutes already using Pitthugram to conduct tests, manage students, and grow digitally.</p>
+            <ul class="trust-list">
+                <li><i class="ph-fill ph-check-circle"></i> No credit card required</li>
+                <li><i class="ph-fill ph-check-circle"></i> Full setup done by our team</li>
+                <li><i class="ph-fill ph-check-circle"></i> Instant MCQ test platform</li>
+                <li><i class="ph-fill ph-check-circle"></i> Works on any phone or desktop</li>
+                <li><i class="ph-fill ph-check-circle"></i> Dedicated support throughout</li>
+            </ul>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="setup-card">
+            <h2>Start Your Free Setup</h2>
+            <p class="subtitle">Fill in your details — we'll take it from here.</p>
+
+            <div id="setupForm">
+                <p class="required-note">All fields marked <span>*</span> are mandatory.</p>
+
+                <div class="form-group">
+                    <div class="field-label-row">
+                        <label for="name">Your Name</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-user"></i>
+                        <input type="text" id="name" placeholder="e.g. Rajesh Kumar" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="field-label-row">
+                        <label for="institute">Institute Name</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-buildings"></i>
+                        <input type="text" id="institute" placeholder="e.g. Excel Coaching Centre" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="field-label-row">
+                        <label for="email">Email Address</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-envelope-simple"></i>
+                        <input type="email" id="email" placeholder="you@institute.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:1.5rem;">
+                    <div class="field-label-row">
+                        <label for="phone">Phone Number</label>
+                        <span style="font-size:0.75rem;color:var(--text-muted);margin-left:0.25rem;">(optional)</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-phone"></i>
+                        <input type="tel" id="phone" placeholder="e.g. 9876543210">
+                    </div>
+                </div>
+
+                <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
+                    Request Free Setup <i class="ph ph-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="success-state" id="successState">
+                <div class="check-circle">
+                    <i class="ph-fill ph-check"></i>
+                </div>
+                <h3>You're on the list!</h3>
+                <p>Thank you. Our team will contact you within <strong>24 hours</strong> to complete your free setup.</p>
+                <a href="index.html" class="back-link" style="justify-content:center;margin-top:1.5rem;display:inline-flex;">
+                    <i class="ph ph-arrow-left"></i> Back to home
+                </a>
+            </div>
+
+            <a href="index.html" class="back-link" id="backLink">
+                <i class="ph ph-arrow-left"></i> Back to main site
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo" style="margin-bottom:1rem;">
+                    <img src="logo.png" alt="Pitthugram" style="height:36px;">
+                </a>
+                <p>The technology backbone for India's best coaching institutes.</p>
+                <div class="social-links">
+                    <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <a href="#">Website Development</a>
+                <a href="#">Professional Email</a>
+                <a href="#">Custom LMS</a>
+                <a href="#">SEO Optimization</a>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="index.html#about">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="teacher-login.html">Teacher Login</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Pitthugram. All rights reserved. | Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, Uttar Pradesh 201301</p>
+        </div>
+    </div>
+</footer>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/910000000000" class="wa-float" target="_blank" rel="noopener">
+    <i class="ph-fill ph-whatsapp-logo"></i>
+</a>
+
+<script>
+// Mobile menu
+const hamburger   = document.getElementById('hamburger');
+const mobileNav   = document.getElementById('mobileNav');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click',   () => mobileNav.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+function handleSetupSubmit() {
+    const name      = document.getElementById('name').value.trim();
+    const institute = document.getElementById('institute').value.trim();
+    const email     = document.getElementById('email').value.trim();
+
+    if (!name) { alert('Please enter your name.'); document.getElementById('name').focus(); return; }
+    if (!institute) { alert('Please enter your institute name.'); document.getElementById('institute').focus(); return; }
+    if (!email) { alert('Please enter your email address.'); document.getElementById('email').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); document.getElementById('email').focus(); return; }
+
+    const btn = document.getElementById('setupSubmit');
+    btn.innerHTML = '<i class="ph ph-spinner-gap"></i> Submitting...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+        document.getElementById('setupForm').style.display = 'none';
+        document.getElementById('successState').style.display = 'block';
+        document.getElementById('backLink').style.display = 'none';
+    }, 1000);
+}
+</script>
+</body>
+</html>
