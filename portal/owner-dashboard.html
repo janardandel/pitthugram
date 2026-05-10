@@ -267,13 +267,10 @@
 <!-- Navbar -->
 <header class="navbar">
     <div class="container nav-inner">
-        <a href="./teacher-home.html" class="logo">
+        <a href="./owner-dashboard.html" class="logo">
             <img src="./logo.png" alt="Pitthugram">
         </a>
         <div class="nav-actions" style="display:flex;gap:0.75rem;">
-            <button id="switchTeacherBtn" onclick="switchToTeacher()" class="btn btn-outline btn-sm" style="display:none;padding:0.5rem 1rem;">
-                <i class="ph ph-chalkboard-teacher"></i><span class="btn-label"> Teacher View</span>
-            </button>
             <button onclick="logout()" class="btn btn-outline btn-sm" style="padding:0.5rem 1rem;border-color:rgba(239,68,68,0.4);color:#FCA5A5;">
                 <i class="ph ph-sign-out"></i><span class="btn-label"> Logout</span>
             </button>
@@ -503,8 +500,6 @@ let moodleToken = null;
             return;
         }
 
-        // Confirmed owner — show Teacher View switch
-        document.getElementById('switchTeacherBtn').style.display = 'inline-flex';
     } catch (_) {
         window.location.href = 'index.html';
         return;
@@ -768,12 +763,6 @@ function renderUsersTable(users) {
 
 function esc(str) {
     return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ── Switch to Teacher View (owner only — button hidden for teachers) ──
-function switchToTeacher() {
-    // TODO: update href below to your site's teacher page once it exists
-    window.location.href = './teacher-home.html';
 }
 
 // ── Logout ──
