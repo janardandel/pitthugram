@@ -4,12 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Login — Pitthugram</title>
-    <link rel="icon" href="../logo.png">
+    <link rel="icon" type="image/png" href="./favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
-    <link rel="stylesheet" href="../style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link rel="stylesheet" href="./style.css">
+    <style>
+        .login-page {
+            min-height: calc(100vh - 68px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,9 +27,9 @@
 <header class="navbar">
     <div class="container nav-inner">
         <a href="../index.html" class="logo">
-            <img src="../logo.png" alt="Pitthugram">
+            <img src="./logo.png" alt="Pitthugram">
         </a>
-        <div class="nav-actions" style="display:flex;">
+        <div class="nav-actions">
             <a href="../index.html" class="btn btn-outline btn-sm" style="padding:0.5rem 1rem;">
                 <i class="ph ph-house"></i> Home
             </a>
@@ -32,7 +42,7 @@
     <div class="login-card">
 
         <a href="../index.html" class="login-logo">
-            <img src="../logo.png" alt="Pitthugram">
+            <img src="./logo.png" alt="Pitthugram">
         </a>
 
         <div class="login-head">
@@ -43,7 +53,6 @@
             <p>Sign in to schedule MCQ tests for your students</p>
         </div>
 
-        <!-- Alert -->
         <div class="alert-box" id="alertBox">
             <i class="ph-fill ph-warning-circle"></i>
             <span id="alertMsg"></span>
@@ -68,10 +77,10 @@
                 </div>
             </div>
             <button type="submit" class="btn-login" id="loginBtn">
-                <span id="loginText">Sign In</span>
-                <i class="ph ph-arrow-right" id="loginArrow"></i>
+                <span>Sign In</span>
+                <i class="ph ph-arrow-right"></i>
             </button>
-            <div id="standaloneSpinner" style="display:none;width:24px;height:24px;border:2px solid rgba(244,0,9,0.25);border-top-color:#f40009;border-radius:50%;animation:spin 0.7s linear infinite;margin:.75rem auto 0;"></div>
+            <div id="loginSpinner" style="display:none;width:24px;height:24px;border:2px solid rgba(244,0,9,0.25);border-top-color:#f40009;border-radius:50%;animation:spin 0.7s linear infinite;margin:.75rem auto 0;"></div>
         </form>
 
         <div class="login-footer-note">
@@ -82,14 +91,17 @@
 </div>
 
 <script>
-const SUPABASE_URL = 'https://qnqcysdeolnooxxcafwz.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_OpibBhZoOKk2iCZ3pEfZsg_vUm_77vF';
+const SUPABASE_URL = 'https://lekvzyoarawotlsbeoqa.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxla3Z6eW9hcmF3b3Rsc2Jlb3FhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyOTgzNTIsImV4cCI6MjA5Mzg3NDM1Mn0.KO-UyQerUdbxxhqBDX5F51ZMU2WGIi6BLg-b-rDALmk';
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-if (localStorage.getItem('pg_access_token')) {
-    window.location.href = '../quiz-builder.html';
+const existingToken = localStorage.getItem('pg_access_token');
+const existingRole  = localStorage.getItem('pg_role');
+if (existingToken && existingRole === 'teacher') {
+    window.location.href = 'teacher-home.html';
 }
 
-document.getElementById('togglePw').addEventListener('click', function() {
+document.getElementById('togglePw').addEventListener('click', function () {
     const inp  = document.getElementById('password');
     const icon = document.getElementById('eyeIcon');
     if (inp.type === 'password') {
@@ -103,48 +115,41 @@ document.getElementById('togglePw').addEventListener('click', function() {
 
 function showAlert(msg, type) {
     const box = document.getElementById('alertBox');
-    const txt = document.getElementById('alertMsg');
     box.className = 'alert-box alert-' + type;
-    txt.textContent = msg;
+    document.getElementById('alertMsg').textContent = msg;
 }
 
-document.getElementById('loginForm').addEventListener('submit', async function(e) {
+document.getElementById('loginForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const email    = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
 
     document.getElementById('alertBox').className = 'alert-box';
-    document.getElementById('loginBtn').style.display = 'none';
-    document.getElementById('standaloneSpinner').style.display = 'block';
+    document.getElementById('loginBtn').style.display  = 'none';
+    document.getElementById('loginSpinner').style.display = 'block';
 
     try {
-        const res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'apikey': SUPABASE_KEY,
-                'Authorization': 'Bearer ' + SUPABASE_KEY
-            },
-            body: JSON.stringify({ email, password })
-        });
+        const { data: authData, error: authErr } = await sb.auth.signInWithPassword({ email, password });
+        if (authErr) throw new Error(authErr.message || 'Invalid email or password.');
 
-        const data = await res.json();
+        const { data: profile, error: profErr } = await sb.from('profiles').select('role').eq('id', authData.user.id).single();
+        if (profErr) throw new Error('Account not configured. Please contact support.');
 
-        if (!res.ok) {
-            throw new Error(data.error_description || data.msg || 'Invalid email or password.');
-        }
+        const role = profile?.role;
+        if (role !== 'teacher') throw new Error('This login is for teachers only.');
 
-        localStorage.setItem('pg_access_token',  data.access_token);
-        localStorage.setItem('pg_refresh_token', data.refresh_token);
-        localStorage.setItem('pg_user', JSON.stringify(data.user));
+        localStorage.setItem('pg_access_token',  authData.session.access_token);
+        localStorage.setItem('pg_refresh_token', authData.session.refresh_token);
+        localStorage.setItem('pg_user',          JSON.stringify({ id: authData.user.id, email: authData.user.email }));
+        localStorage.setItem('pg_role',          role);
 
-        document.getElementById('standaloneSpinner').style.display = 'none';
-        showAlert('Login successful! Redirecting...', 'success');
+        document.getElementById('loginSpinner').style.display = 'none';
+        showAlert('Login successful! Redirecting…', 'success');
 
-        setTimeout(() => { window.location.href = '../quiz-builder.html'; }, 800);
+        setTimeout(() => { window.location.href = 'teacher-home.html'; }, 800);
 
     } catch (err) {
-        document.getElementById('standaloneSpinner').style.display = 'none';
+        document.getElementById('loginSpinner').style.display = 'none';
         document.getElementById('loginBtn').style.display = 'flex';
         showAlert(err.message || 'Something went wrong. Please try again.', 'error');
     }
