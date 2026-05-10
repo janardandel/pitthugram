@@ -311,7 +311,7 @@
                         <i class="ph-fill ph-lock"></i>
                         <h2>Login Required</h2>
                         <p>Please sign in with your teacher account to access the quiz builder.</p>
-                        <a href="teacher-login.html" class="btn btn-primary">
+                        <a href="portal/teacher-login.html" class="btn btn-primary">
                             <i class="ph ph-sign-in"></i> Go to Login
                         </a>
                     </div>
@@ -663,7 +663,7 @@ function logout() {
     localStorage.removeItem('pg_access_token');
     localStorage.removeItem('pg_refresh_token');
     localStorage.removeItem('pg_user');
-    window.location.href = 'teacher-login.html';
+    window.location.href = 'portal/teacher-login.html';
 }
 
 // ── Fetch questions ───────────────────────────────────
