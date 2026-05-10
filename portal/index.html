@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal — Pitthugram</title>
+    <title>Teacher Login — Pitthugram</title>
     <link rel="icon" type="image/png" href="./favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./style.css">
     <style>
         .portal-page {
-            min-height: 100vh;
+            min-height: calc(100vh - 68px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -36,20 +36,35 @@
 </head>
 <body>
 
+<!-- Navbar -->
+<header class="navbar">
+    <div class="container nav-inner">
+        <a href="../index.html" class="logo">
+            <img src="./logo.png" alt="Pitthugram">
+        </a>
+        <div class="nav-actions">
+            <a href="../index.html" class="btn btn-outline btn-sm" style="padding:0.5rem 1rem;">
+                <i class="ph ph-house"></i> Home
+            </a>
+        </div>
+    </div>
+</header>
+
+<!-- Login -->
 <div class="portal-page">
     <div class="portal-glow"></div>
 
     <div class="login-card" style="position:relative;z-index:1;">
-        <a href="./index.html" class="login-logo">
+        <a href="../index.html" class="login-logo">
             <img src="./logo.png" alt="Pitthugram">
         </a>
 
         <div class="login-head">
             <div class="icon-wrap">
-                <i class="ph-fill ph-lock-key"></i>
+                <i class="ph-fill ph-chalkboard-teacher"></i>
             </div>
-            <h1>Welcome Back</h1>
-            <p>Sign in to your portal</p>
+            <h1>Teacher Portal</h1>
+            <p>Sign in to schedule MCQ tests for your students</p>
         </div>
 
         <div class="alert-box" id="alertBox">
