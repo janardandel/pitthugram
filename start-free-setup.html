@@ -318,6 +318,7 @@
                 <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
                     Request Free Setup <i class="ph ph-arrow-right"></i>
                 </button>
+                <p id="submitError" style="display:none;color:#e53e3e;margin-top:0.75rem;font-size:0.9rem;text-align:center;"></p>
             </div>
 
             <div class="success-state" id="successState">
@@ -390,25 +391,42 @@ hamburger.addEventListener('click',   () => mobileNav.classList.add('open'));
 mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
 
-function handleSetupSubmit() {
+async function handleSetupSubmit() {
     const name      = document.getElementById('name').value.trim();
     const institute = document.getElementById('institute').value.trim();
     const email     = document.getElementById('email').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
 
     if (!name) { alert('Please enter your name.'); document.getElementById('name').focus(); return; }
     if (!institute) { alert('Please enter your institute name.'); document.getElementById('institute').focus(); return; }
     if (!email) { alert('Please enter your email address.'); document.getElementById('email').focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); document.getElementById('email').focus(); return; }
+    if (!phone) { alert('Please enter your phone number.'); document.getElementById('phone').focus(); return; }
 
     const btn = document.getElementById('setupSubmit');
+    const errEl = document.getElementById('submitError');
     btn.innerHTML = '<i class="ph ph-spinner-gap"></i> Submitting...';
     btn.disabled = true;
+    errEl.style.display = 'none';
 
-    setTimeout(() => {
-        document.getElementById('setupForm').style.display = 'none';
-        document.getElementById('successState').style.display = 'block';
-        document.getElementById('backLink').style.display = 'none';
-    }, 1000);
+    try {
+        const res = await fetch('https://awsn8n.pitthugram.com/webhook/free-setup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, institute, email, phone })
+        });
+        if (!res.ok) throw new Error('Server error ' + res.status);
+    } catch (err) {
+        btn.innerHTML = 'Request Free Setup <i class="ph ph-arrow-right"></i>';
+        btn.disabled = false;
+        errEl.textContent = 'Could not reach our server. Please check your connection and try again.';
+        errEl.style.display = 'block';
+        return;
+    }
+
+    document.getElementById('setupForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    document.getElementById('backLink').style.display = 'none';
 }
 </script>
 </body>
