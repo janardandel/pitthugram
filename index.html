@@ -11,7 +11,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
+    /* Payment Modal */
+    .pay-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+    }
+    .pay-modal-overlay.open { display: flex; }
+    .pay-modal {
+        background: #fff;
+        border-radius: 16px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 420px;
+        margin: 1rem;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .pay-modal h3 { margin: 0 0 0.25rem; font-size: 1.25rem; }
+    .pay-modal .pay-plan-label {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 1.5rem;
+    }
+    .pay-modal label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+        color: #333;
+    }
+    .pay-modal input {
+        width: 100%;
+        padding: 0.65rem 0.9rem;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        box-sizing: border-box;
+        transition: border-color 0.2s;
+    }
+    .pay-modal input:focus { outline: none; border-color: #F40009; }
+    .pay-modal-actions { display: flex; gap: 0.75rem; margin-top: 0.5rem; }
+    .pay-modal-actions .btn { flex: 1; justify-content: center; }
+    .pay-error { color: #F40009; font-size: 0.82rem; margin-top: -0.5rem; margin-bottom: 0.75rem; display: none; }
+    .pay-spinner { display: none; }
+    .pay-modal.loading .btn-primary span { display: none; }
+    .pay-modal.loading .pay-spinner { display: inline; }
     </style>
 </head>
 <body>
@@ -259,7 +310,7 @@
         <div class="grid-3">
             <div class="pricing-card">
                 <div class="plan-name">Starter</div>
-                <div class="plan-price">₹4,999<span>/year</span></div>
+                <div class="plan-price">₹4,999<span>/month</span></div>
                 <p class="plan-desc">Perfect for small institutes wanting a digital presence.</p>
                 <ul class="plan-features">
                     <li><i class="ph ph-check"></i> Standard Website (5 pages)</li>
@@ -267,7 +318,7 @@
                     <li><i class="ph ph-check"></i> Contact Form</li>
                     <li><i class="ph ph-x"></i> No LMS Included</li>
                 </ul>
-                <a href="start-free-setup.html" class="btn btn-outline plan-btn">Choose Starter</a>
+                <button class="btn btn-outline plan-btn" onclick="openPayModal('Starter Plan', 4999)">Subscribe Now</button>
             </div>
             <div class="pricing-card popular">
                 <div class="popular-badge">Most Popular</div>
@@ -348,6 +399,26 @@
     </div>
 </footer>
 
+<!-- Payment Modal -->
+<div class="pay-modal-overlay" id="payModalOverlay">
+    <div class="pay-modal" id="payModal">
+        <h3>Complete Your Subscription</h3>
+        <p class="pay-plan-label" id="payPlanLabel"></p>
+        <label for="payName">Full Name</label>
+        <input type="text" id="payName" placeholder="Your institute owner name" autocomplete="name">
+        <label for="payEmail">Email Address</label>
+        <input type="email" id="payEmail" placeholder="you@example.com" autocomplete="email">
+        <p class="pay-error" id="payError"></p>
+        <div class="pay-modal-actions">
+            <button class="btn btn-outline" onclick="closePayModal()">Cancel</button>
+            <button class="btn btn-primary" id="payBtn" onclick="startPayment()">
+                <span>Pay ₹<span id="payAmountLabel"></span></span>
+                <span class="pay-spinner">Processing…</span>
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- WhatsApp -->
 <a href="https://wa.me/910000000000" class="wa-float" target="_blank" rel="noopener">
     <i class="ph-fill ph-whatsapp-logo"></i>
@@ -362,6 +433,110 @@ const mobileClose = document.getElementById('mobileClose');
 hamburger.addEventListener('click',   () => mobileNav.classList.add('open'));
 mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
 mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+</script>
+
+<script>
+const WORKER_URL = 'https://pitthugram-payments.YOUR_SUBDOMAIN.workers.dev';
+const RAZORPAY_KEY_ID = 'rzp_test_Sp7dzHz02I4DyZ';
+
+let _payAmount = 0;
+
+function openPayModal(planName, amount) {
+    _payAmount = amount;
+    document.getElementById('payPlanLabel').textContent = planName + ' — ₹' + amount.toLocaleString('en-IN') + '/month';
+    document.getElementById('payAmountLabel').textContent = amount.toLocaleString('en-IN');
+    document.getElementById('payError').style.display = 'none';
+    document.getElementById('payModalOverlay').classList.add('open');
+    document.getElementById('payName').focus();
+}
+
+function closePayModal() {
+    document.getElementById('payModalOverlay').classList.remove('open');
+    document.getElementById('payModal').classList.remove('loading');
+}
+
+async function startPayment() {
+    const name  = document.getElementById('payName').value.trim();
+    const email = document.getElementById('payEmail').value.trim();
+    const errEl = document.getElementById('payError');
+
+    if (!name || !email) {
+        errEl.textContent = 'Please enter your name and email.';
+        errEl.style.display = 'block';
+        return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errEl.textContent = 'Please enter a valid email address.';
+        errEl.style.display = 'block';
+        return;
+    }
+
+    errEl.style.display = 'none';
+    document.getElementById('payModal').classList.add('loading');
+
+    let order;
+    try {
+        const res = await fetch(WORKER_URL + '/api/razorpay/create-order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ amount: _payAmount, customerName: name, customerEmail: email }),
+        });
+        order = await res.json();
+        if (!res.ok) throw new Error(order.error || 'Order creation failed');
+    } catch (err) {
+        document.getElementById('payModal').classList.remove('loading');
+        errEl.textContent = 'Could not initiate payment. Please try again.';
+        errEl.style.display = 'block';
+        return;
+    }
+
+    const options = {
+        key: RAZORPAY_KEY_ID,
+        amount: order.amount,
+        currency: order.currency,
+        name: 'Pitthugram',
+        description: 'Starter Plan — Monthly Subscription',
+        order_id: order.order_id,
+        prefill: { name, email },
+        theme: { color: '#F40009' },
+        modal: {
+            ondismiss: () => {
+                document.getElementById('payModal').classList.remove('loading');
+            }
+        },
+        handler: async function(response) {
+            try {
+                const verifyRes = await fetch(WORKER_URL + '/api/razorpay/verify-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        razorpay_order_id:   response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature:  response.razorpay_signature,
+                    }),
+                });
+                const result = await verifyRes.json();
+                closePayModal();
+                if (result.success) {
+                    alert('Payment successful! Welcome to Pitthugram. Check your email for confirmation.');
+                } else {
+                    alert('Payment received but verification failed. Please contact support with payment ID: ' + response.razorpay_payment_id);
+                }
+            } catch {
+                closePayModal();
+                alert('Payment received. Our team will confirm your subscription shortly.');
+            }
+        }
+    };
+
+    closePayModal();
+    const rzp = new Razorpay(options);
+    rzp.open();
+}
+
+document.getElementById('payModalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closePayModal();
+});
 </script>
 </body>
 </html>
