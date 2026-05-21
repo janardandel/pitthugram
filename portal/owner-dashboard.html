@@ -300,7 +300,7 @@
         </div>
 
         <!-- Moodle config not set warning -->
-        <div class="config-banner" id="configBanner">
+        <div class="config-banner hidden" id="configBanner">
             <i class="ph-fill ph-warning"></i>
             Moodle is not configured. Add your Moodle URL and token in the database (<code>moodle_config</code> table) to enable account management.
         </div>
@@ -507,8 +507,8 @@ let moodleToken = null;
         return;
     }
 
-    document.body.style.visibility = 'visible';
     await loadMoodleConfig();
+    document.body.style.visibility = 'visible';
 })();
 
 async function loadMoodleConfig() {
@@ -520,7 +520,8 @@ async function loadMoodleConfig() {
         if (rows && rows[0] && rows[0].moodle_url && rows[0].moodle_token) {
             moodleURL   = rows[0].moodle_url.replace(/\/$/, '');
             moodleToken = rows[0].moodle_token;
-            document.getElementById('configBanner').classList.add('hidden');
+        } else {
+            document.getElementById('configBanner').classList.remove('hidden');
         }
     } catch (_) {}
 }
