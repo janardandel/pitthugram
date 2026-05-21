@@ -260,6 +260,8 @@
             .od-field-row { grid-template-columns: 1fr; }
             .od-page { padding: 1.25rem 1rem; }
         }
+
+        body { visibility: hidden; }
     </style>
 </head>
 <body>
@@ -505,6 +507,7 @@ let moodleToken = null;
         return;
     }
 
+    document.body.style.visibility = 'visible';
     await loadMoodleConfig();
 })();
 
