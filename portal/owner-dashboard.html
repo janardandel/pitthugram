@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Owner Dashboard — Pitthugram</title>
     <link rel="icon" type="image/png" href="./favicon.png">
+    <script>if(!localStorage.getItem('pg_access_token')){location.replace('index.html');}</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -261,7 +262,7 @@
             .od-page { padding: 1.25rem 1rem; }
         }
 
-        body { visibility: hidden; }
+        body { opacity: 0; }
     </style>
 </head>
 <body>
@@ -508,7 +509,8 @@ let moodleToken = null;
     }
 
     await loadMoodleConfig();
-    document.body.style.visibility = 'visible';
+    document.body.style.transition = 'opacity 0.15s ease';
+    document.body.style.opacity = '1';
 })();
 
 async function loadMoodleConfig() {
