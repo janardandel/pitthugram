@@ -309,43 +309,43 @@
         </div>
         <div class="grid-3">
             <div class="pricing-card">
-                <div class="plan-name">Starter</div>
-                <div class="plan-price">₹4,999<span>/month</span></div>
-                <p class="plan-desc">Perfect for small institutes wanting a digital presence.</p>
+                <div class="plan-name">Pioneer</div>
+                <div class="plan-price">₹2,999<span>/month</span></div>
+                <p class="plan-desc">Perfect for small institutes getting started with digital tools.</p>
                 <ul class="plan-features">
-                    <li><i class="ph ph-check"></i> Standard Website (5 pages)</li>
-                    <li><i class="ph ph-check"></i> 1 Professional Email</li>
-                    <li><i class="ph ph-check"></i> Contact Form</li>
-                    <li><i class="ph ph-x"></i> No LMS Included</li>
+                    <li><i class="ph ph-check"></i> Up to 100 Students</li>
+                    <li><i class="ph ph-check"></i> Standard Website</li>
+                    <li><i class="ph ph-check"></i> Student Management</li>
+                    <li><i class="ph ph-check"></i> Basic Analytics</li>
                 </ul>
                 <a href="start-free-setup.html" class="btn btn-outline plan-btn"><i class="ph ph-arrow-right"></i> Get Started</a>
             </div>
             <div class="pricing-card popular">
                 <div class="popular-badge">Most Popular</div>
-                <div class="plan-name">Digital Institute</div>
-                <div class="plan-price">₹14,999<span>/year</span></div>
+                <div class="plan-name">Academy</div>
+                <div class="plan-price">₹5,299<span>/month</span></div>
                 <p class="plan-desc">For growing centers looking to automate their management.</p>
                 <ul class="plan-features">
+                    <li><i class="ph ph-check"></i> Up to 200 Students</li>
                     <li><i class="ph ph-check"></i> Custom Website Design</li>
-                    <li><i class="ph ph-check"></i> 5 Professional Emails</li>
                     <li><i class="ph ph-check"></i> Full LMS Implementation</li>
-                    <li><i class="ph ph-check"></i> Up to 500 Students</li>
-                    <li><i class="ph ph-check"></i> Basic Analytics</li>
+                    <li><i class="ph ph-check"></i> Advanced Analytics</li>
+                    <li><i class="ph ph-check"></i> Priority Support</li>
                 </ul>
                 <a href="start-free-setup.html" class="btn btn-primary plan-btn">Get Started</a>
             </div>
             <div class="pricing-card">
-                <div class="plan-name">Enterprise</div>
-                <div class="plan-price">Custom</div>
-                <p class="plan-desc">For massive chains of coaching institutes across cities.</p>
+                <div class="plan-name">Pinnacle</div>
+                <div class="plan-price">₹10,499<span>/month</span></div>
+                <p class="plan-desc">For established institutes aiming for the top.</p>
                 <ul class="plan-features">
+                    <li><i class="ph ph-check"></i> Up to 500 Students</li>
                     <li><i class="ph ph-check"></i> Multi-branch Website</li>
-                    <li><i class="ph ph-check"></i> Unlimited Emails</li>
                     <li><i class="ph ph-check"></i> Advanced LMS (White-label)</li>
-                    <li><i class="ph ph-check"></i> Unlimited Students</li>
                     <li><i class="ph ph-check"></i> Dedicated Account Manager</li>
+                    <li><i class="ph ph-check"></i> Custom Integrations</li>
                 </ul>
-                <a href="start-free-setup.html" class="btn btn-outline plan-btn">Talk to Sales</a>
+                <a href="start-free-setup.html" class="btn btn-outline plan-btn">Get Started</a>
             </div>
         </div>
     </div>
@@ -440,9 +440,11 @@ const WORKER_URL = 'https://payment-gateway.pitthugram.workers.dev';
 const RAZORPAY_KEY_ID = 'rzp_test_Sp7dzHz02I4DyZ';
 
 let _payAmount = 0;
+let _payPlanName = '';
 
 function openPayModal(planName, amount) {
     _payAmount = amount;
+    _payPlanName = planName;
     document.getElementById('payPlanLabel').textContent = planName + ' — ₹' + amount.toLocaleString('en-IN') + '/month';
     document.getElementById('payAmountLabel').textContent = amount.toLocaleString('en-IN');
     document.getElementById('payError').style.display = 'none';
@@ -495,7 +497,7 @@ async function startPayment() {
         amount: order.amount,
         currency: order.currency,
         name: 'Pitthugram',
-        description: 'Starter Plan — Monthly Subscription',
+        description: _payPlanName + ' Plan — Monthly Subscription',
         order_id: order.order_id,
         prefill: { name, email },
         theme: { color: '#F40009' },
