@@ -292,6 +292,20 @@
 
 </div>
 
+<style>
+  /* Make the msg91 chat launcher larger and brand-red so visitors notice it */
+  [id$="hello-chatbot-launcher-icon"] {
+    transform: scale(1.5);
+    transform-origin: bottom right;
+    bottom: 24px !important;
+    right: 24px !important;
+  }
+  [id$="hello-chatbot-icon-image"] > div {
+    background: #F40009 !important;
+    border-color: #F40009 !important;
+  }
+  [id$="hello-chatbot-icon-image"] svg path { fill: #ffffff !important; }
+</style>
 <!-- MSG91 Hello Chat Widget -->
 <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script>
 <script type="text/javascript">
