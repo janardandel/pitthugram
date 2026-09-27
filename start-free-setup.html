@@ -313,6 +313,11 @@
                     </div>
                 </div>
 
+                <label class="wa-optin" for="whatsappOptIn" style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem;font-size:0.9rem;color:var(--text-secondary,#555);cursor:pointer;">
+                    <input type="checkbox" id="whatsappOptIn" style="width:auto;margin:0;">
+                    Also send my login on WhatsApp
+                </label>
+
                 <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
                     Request Free Setup <i class="ph ph-arrow-right"></i>
                 </button>
@@ -325,6 +330,9 @@
                 </div>
                 <h3>You're on the list!</h3>
                 <p>Thank you. Our team will contact you within <strong>24 hours</strong> to complete your free setup.</p>
+                <a href="#" id="waButton" target="_blank" class="setup-submit" style="display:none;margin-top:1rem;text-decoration:none;justify-content:center;align-items:center;gap:0.5rem;">
+                    <i class="ph-fill ph-whatsapp-logo"></i> Message us on WhatsApp
+                </a>
                 <a href="index.html" class="back-link" style="justify-content:center;margin-top:1.5rem;display:inline-flex;">
                     <i class="ph ph-arrow-left"></i> Back to home
                 </a>
@@ -445,6 +453,15 @@ async function handleSetupSubmit() {
     document.getElementById('setupForm').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
     document.getElementById('backLink').style.display = 'none';
+
+    if (document.getElementById('whatsappOptIn').checked) {
+        const waPhone = '919717183064'; // Pitthugram WhatsApp number, country code + number, digits only
+        const digits = phone.replace(/\D/g, '');
+        const msg = encodeURIComponent('CREDS ' + digits);
+        const waBtn = document.getElementById('waButton');
+        waBtn.href = 'https://wa.me/' + waPhone + '?text=' + msg;
+        waBtn.style.display = 'inline-flex';
+    }
 }
 </script>
 </body>
