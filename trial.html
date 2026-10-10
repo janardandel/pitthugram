@@ -240,14 +240,25 @@
             transition: var(--transition);
         }
         .back-link:hover { color: var(--text-primary); }
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .setup-wrapper {
-                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column;
                 gap: 2.5rem;
             }
+            .setup-card {
+                order: 1;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 2rem 1.5rem;
+            }
+            .setup-left {
+                order: 2;
+                width: 100%;
+                box-sizing: border-box;
+            }
             .setup-left h1 { font-size: 1.85rem; }
-            .setup-card { padding: 1.75rem 1.25rem; }
-            .setup-page { padding: 4rem 1.25rem 3rem; }
+            .setup-page { padding: 3.5rem 1.25rem 3rem; }
         }
     </style>
 </head>
