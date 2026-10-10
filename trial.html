@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Free Trial — Pitthugram</title>
+    <meta name="description" content="Get your coaching institute online in 24 hours. Start your free trial today.">
+    <link rel="icon" href="logo.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .setup-page {
+            min-height: calc(100vh - 72px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 1.5rem 4rem;
+            background: var(--bg-base);
+            position: relative;
+            overflow: hidden;
+        }
+        .setup-page::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(244,0,9,0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .setup-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 900px;
+            width: 100%;
+            align-items: center;
+        }
+        .setup-left h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        .setup-left h1 span { color: var(--primary); }
+        .setup-left p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .setup-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--primary-light);
+            border: 1px solid rgba(244,0,9,0.25);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 0.35rem 0.875rem;
+            border-radius: 100px;
+            margin-bottom: 1.25rem;
+        }
+        .trust-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .trust-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .trust-list li i {
+            color: var(--success);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        .setup-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .setup-card h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.375rem;
+        }
+        .setup-card .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 1.75rem;
+        }
+        .form-group {
+            margin-bottom: 1.125rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.375rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .input-icon-wrap {
+            position: relative;
+        }
+        .input-icon-wrap i {
+            position: absolute;
+            left: 0.875rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+        .input-icon-wrap input {
+            width: 100%;
+            padding: 0.75rem 0.875rem 0.75rem 2.5rem;
+            background: var(--bg-surface-2);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: var(--transition);
+            box-sizing: border-box;
+        }
+        .input-icon-wrap input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(244,0,9,0.12);
+        }
+        .input-icon-wrap input::placeholder {
+            color: var(--text-muted);
+        }
+        .setup-submit {
+            width: 100%;
+            padding: 0.875rem;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+        .setup-submit:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+        .setup-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .required-note {
+            font-size: 0.775rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+        .required-note span { color: var(--primary); }
+        .field-label-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.375rem;
+        }
+        .field-label-row label {
+            margin-bottom: 0;
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .field-label-row .req {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+        .success-state {
+            display: none;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .success-state .check-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(34,197,94,0.12);
+            border: 2px solid var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            color: var(--success);
+            font-size: 1.75rem;
+        }
+        .success-state h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+        .success-state p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            transition: var(--transition);
+        }
+        .back-link:hover { color: var(--text-primary); }
+        @media (max-width: 768px) {
+            .setup-wrapper {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .setup-left h1 { font-size: 1.85rem; }
+            .setup-card { padding: 1.75rem 1.25rem; }
+            .setup-page { padding: 4rem 1.25rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Navbar ── -->
+<header class="navbar">
+    <div class="container nav-inner">
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Pitthugram">
+        </a>
+        <nav class="nav-links">
+            <a href="index.html#how-it-works">How it Works</a>
+            <a href="index.html#benefits">Benefits</a>
+            <a href="index.html#pricing">Pricing</a>
+            <a href="index.html#about">About</a>
+        </nav>
+        <div class="nav-actions">
+            <a href="trial.html" class="btn btn-primary">Start Free Trial</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <i class="ph ph-list"></i>
+        </button>
+    </div>
+</header>
+
+<!-- ── Mobile Nav ── -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Pitthugram" style="height:34px;"></a>
+        <button class="mobile-close" id="mobileClose"><i class="ph ph-x"></i></button>
+    </div>
+    <nav class="mobile-nav-links">
+        <a href="index.html#how-it-works">How it Works</a>
+        <a href="index.html#benefits">Benefits</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#about">About</a>
+    </nav>
+    <div class="mobile-nav-actions">
+        <a href="trial.html" class="btn btn-primary" style="justify-content:center;">Start Free Trial</a>
+    </div>
+</div>
+
+<!-- ── Setup Page ── -->
+<main class="setup-page" id="trial">
+    <div class="setup-wrapper">
+
+        <!-- Left: Info -->
+        <div class="setup-left">
+            <div class="setup-badge">
+                <i class="ph-fill ph-gift"></i> Free Trial
+            </div>
+            <h1>Get Your Institute <span>Online in 24 Hours</span></h1>
+            <p>Join hundreds of coaching institutes already using Pitthugram to conduct tests, manage students, and grow digitally.</p>
+            <ul class="trust-list">
+                <li><i class="ph-fill ph-check-circle"></i> No credit card required</li>
+                <li><i class="ph-fill ph-check-circle"></i> Full setup done by our team</li>
+                <li><i class="ph-fill ph-check-circle"></i> Instant MCQ test platform</li>
+                <li><i class="ph-fill ph-check-circle"></i> Works on any phone or desktop</li>
+                <li><i class="ph-fill ph-check-circle"></i> Dedicated support throughout</li>
+            </ul>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="setup-card">
+            <h2>Start Your Free Trial</h2>
+            <p class="subtitle">Fill in your details — we'll take it from here.</p>
+
+            <div id="setupForm">
+                <!-- Honeypot bot protection field (hidden off-screen via CSS, not display:none) -->
+                <div style="position: absolute; left: -9999px; top: -9999px; width: 0; height: 0; opacity: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
+                    <label for="website">Website (Leave blank)</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
+                </div>
+
+                <p class="required-note">All fields marked <span>*</span> are mandatory.</p>
+
+                <div class="form-group">
+                    <div class="field-label-row">
+                        <label for="name">Your Name</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-user"></i>
+                        <input type="text" id="name" placeholder="e.g. Rajesh Kumar" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="field-label-row">
+                        <label for="institute">Institute Name</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-buildings"></i>
+                        <input type="text" id="institute" placeholder="e.g. Excel Coaching Centre" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="field-label-row">
+                        <label for="email">Email Address</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-envelope-simple"></i>
+                        <input type="email" id="email" placeholder="you@institute.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:1.5rem;">
+                    <div class="field-label-row">
+                        <label for="phone">Phone Number</label>
+                        <span class="req">*</span>
+                    </div>
+                    <div class="input-icon-wrap">
+                        <i class="ph ph-phone"></i>
+                        <input type="tel" id="phone" placeholder="e.g. 9876543210" required>
+                    </div>
+                </div>
+
+                <label class="wa-optin" for="whatsappOptIn" style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem;font-size:0.9rem;color:var(--text-secondary,#555);cursor:pointer;">
+                    <input type="checkbox" id="whatsappOptIn" style="width:auto;margin:0;">
+                    Also send my login on WhatsApp
+                </label>
+
+                <!-- Cloudflare Turnstile Bot Protection (Replace sitekey with production key from Cloudflare Dashboard) -->
+                <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" style="margin-bottom:1.25rem;display:flex;justify-content:center;"></div>
+
+                <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
+                    Request Free Setup <i class="ph ph-arrow-right"></i>
+                </button>
+                <p id="submitError" style="display:none;color:#e53e3e;margin-top:0.75rem;font-size:0.9rem;text-align:center;"></p>
+
+                <!-- Terms and Privacy Agreement -->
+                <p style="font-size:0.8rem;color:var(--text-secondary,#888);text-align:center;margin-top:1rem;line-height:1.5;">
+                    By continuing, you agree to our 
+                    <a href="terms-of-service.html" style="color:var(--primary);text-decoration:underline;">Terms of Service</a> 
+                    and 
+                    <a href="privacy-policy.html" style="color:var(--primary);text-decoration:underline;">Privacy Policy</a>.
+                </p>
+            </div>
+
+            <div class="success-state" id="successState">
+                <div class="check-circle">
+                    <i class="ph-fill ph-check"></i>
+                </div>
+                <h3>You're on the list!</h3>
+                <p>You're on the list! Check your email in the next 5 minutes for your login details. Didn't get it? Check your spam folder, or message us on WhatsApp. Our team will also reach out within 24 hours to finish setting up your institute.</p>
+                <a href="#" id="waButton" target="_blank" class="setup-submit" style="display:none;margin-top:1rem;text-decoration:none;justify-content:center;align-items:center;gap:0.5rem;">
+                    <i class="ph-fill ph-whatsapp-logo"></i> Message us on WhatsApp
+                </a>
+                <a href="index.html" class="back-link" style="justify-content:center;margin-top:1.5rem;display:inline-flex;">
+                    <i class="ph ph-arrow-left"></i> Back to home
+                </a>
+            </div>
+
+            <a href="index.html" class="back-link" id="backLink">
+                <i class="ph ph-arrow-left"></i> Back to main site
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="index.html" class="logo" style="margin-bottom:1rem;">
+                    <img src="logo.png" alt="Pitthugram" style="height:36px;">
+                </a>
+                <p>The technology backbone for India's best coaching institutes.</p>
+                <div class="social-links">
+                    <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <a href="index.html#about">About Us</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Pitthugram. All rights reserved. | Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, Uttar Pradesh 201301</p>
+        </div>
+    </div>
+</footer>
+
+<style>
+  /* Make the msg91 chat launcher larger and brand-red so visitors notice it */
+  [id$="hello-chatbot-launcher-icon"] {
+    transform: scale(1.5);
+    transform-origin: bottom right;
+    bottom: 24px !important;
+    right: 24px !important;
+  }
+  [id$="hello-chatbot-icon-image"] > div {
+    background: #F40009 !important;
+    border-color: #F40009 !important;
+  }
+  [id$="hello-chatbot-icon-image"] svg path { fill: #ffffff !important; }
+</style>
+<!-- MSG91 Hello Chat Widget -->
+<script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script>
+<script type="text/javascript">
+  var helloConfig = {
+    widgetToken: "98690",
+    hide_launcher: false,
+    show_widget_form: true,
+    show_close_button: true,
+    launch_widget: false,
+    show_send_button: true,
+    theme: "system"
+  };
+  initChatWidget(helloConfig, 0);
+</script>
+<!-- End of MSG91 Hello Chat Widget -->
+
+<script>
+// Mobile menu
+const hamburger   = document.getElementById('hamburger');
+const mobileNav   = document.getElementById('mobileNav');
+const mobileClose = document.getElementById('mobileClose');
+
+hamburger.addEventListener('click',   () => mobileNav.classList.add('open'));
+mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+async function handleSetupSubmit() {
+    const name      = document.getElementById('name').value.trim();
+    const institute = document.getElementById('institute').value.trim();
+    const email     = document.getElementById('email').value.trim();
+    const phone     = document.getElementById('phone').value.trim();
+    const honeypot  = document.getElementById('website')?.value || '';
+
+    // If bot filled the hidden honeypot, fake success silently without hitting backend
+    if (honeypot) {
+        document.getElementById('setupForm').style.display = 'none';
+        document.getElementById('successState').style.display = 'block';
+        document.getElementById('backLink').style.display = 'none';
+        return;
+    }
+
+    if (!name) { alert('Please enter your name.'); document.getElementById('name').focus(); return; }
+    if (!institute) { alert('Please enter your institute name.'); document.getElementById('institute').focus(); return; }
+    if (!email) { alert('Please enter your email address.'); document.getElementById('email').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); document.getElementById('email').focus(); return; }
+    if (!phone) { alert('Please enter your phone number.'); document.getElementById('phone').focus(); return; }
+
+    const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value || '';
+
+    const btn = document.getElementById('setupSubmit');
+    const errEl = document.getElementById('submitError');
+    btn.innerHTML = '<i class="ph ph-spinner-gap"></i> Submitting...';
+    btn.disabled = true;
+    errEl.style.display = 'none';
+
+    try {
+        const res = await fetch('https://awsn8n.pitthugram.com/webhook/free-setup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name,
+                institute,
+                email,
+                phone,
+                website: honeypot,
+                'cf-turnstile-response': turnstileToken,
+                turnstile_token: turnstileToken
+            })
+        });
+        if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.message || ('Server error ' + res.status));
+        }
+    } catch (err) {
+        btn.innerHTML = 'Request Free Setup <i class="ph ph-arrow-right"></i>';
+        btn.disabled = false;
+        errEl.textContent = err.message || 'Could not reach our server. Please check your connection and try again.';
+        errEl.style.display = 'block';
+        return;
+    }
+
+    document.getElementById('setupForm').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    document.getElementById('backLink').style.display = 'none';
+
+    if (document.getElementById('whatsappOptIn').checked) {
+        const waPhone = '919717183064'; // Pitthugram WhatsApp number, country code + number, digits only
+        const digits = phone.replace(/\D/g, '');
+        const msg = encodeURIComponent('CREDS ' + digits);
+        const waBtn = document.getElementById('waButton');
+        waBtn.href = 'https://wa.me/' + waPhone + '?text=' + msg;
+        waBtn.style.display = 'inline-flex';
+    }
+}
+</script>
+</body>
+</html>
