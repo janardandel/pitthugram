@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service — Pitthugram</title>
-    <meta name="description" content="Terms of Service for Pitthugram coaching platform.">
+    <meta name="description" content="Terms of Service governing the use of Pitthugram coaching platform and services.">
     <link rel="icon" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,18 +18,26 @@
             background: var(--bg-base);
         }
         .legal-container {
-            max-width: 800px;
+            max-width: 860px;
             margin: 0 auto;
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-xl);
-            padding: 3rem 2.5rem;
+            padding: 3.5rem 3rem;
             box-shadow: var(--shadow-lg);
         }
         .legal-container h1 {
             font-size: 2.25rem;
             font-weight: 800;
+            line-height: 1.2;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .legal-container .subheading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
         }
         .legal-container .last-updated {
             color: var(--text-muted);
@@ -38,31 +46,81 @@
             padding-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
         }
+        .legal-notice-box {
+            background: rgba(244, 0, 9, 0.04);
+            border-left: 3px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
         .legal-container h2 {
             font-size: 1.35rem;
             font-weight: 700;
-            margin-top: 2rem;
-            margin-bottom: 0.75rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
             color: var(--text-primary);
         }
-        .legal-container p, .legal-container li {
+        .legal-container p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.75;
             margin-bottom: 1rem;
+        }
+        .legal-container strong {
+            color: var(--text-primary);
         }
         .legal-container ul {
             padding-left: 1.5rem;
             margin-bottom: 1.25rem;
         }
+        .legal-container li {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+        .legal-container .clause-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .legal-container .clause-list li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.75rem;
+        }
+        .legal-container .clause-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        .highlight-clause {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
         .legal-container a {
             color: var(--primary);
             text-decoration: underline;
+        }
+        @media (max-width: 640px) {
+            .legal-page { padding: 3rem 1rem 2rem; }
+            .legal-container { padding: 2rem 1.5rem; }
+            .legal-container h1 { font-size: 1.85rem; }
         }
     </style>
 </head>
 <body>
 
+<!-- ── Navbar ── -->
 <header class="navbar">
     <div class="container nav-inner">
         <a href="index.html" class="logo">
@@ -77,42 +135,166 @@
         <div class="nav-actions">
             <a href="start-free-setup.html" class="btn btn-primary">Start Free Setup</a>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <i class="ph ph-list"></i>
+        </button>
     </div>
 </header>
 
+<!-- ── Mobile Nav ── -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Pitthugram" style="height:34px;"></a>
+        <button class="mobile-close" id="mobileClose"><i class="ph ph-x"></i></button>
+    </div>
+    <nav class="mobile-nav-links">
+        <a href="index.html#how-it-works">How it Works</a>
+        <a href="index.html#benefits">Benefits</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#about">About</a>
+    </nav>
+    <div class="mobile-nav-actions">
+        <a href="start-free-setup.html" class="btn btn-primary" style="justify-content:center;">Start Free Setup</a>
+    </div>
+</div>
+
+<!-- ── Main Content ── -->
 <main class="legal-page">
     <div class="legal-container">
+        <div class="subheading">Pitthugram</div>
         <h1>Terms of Service</h1>
-        <p class="last-updated">Last updated: October 2026</p>
+        <p class="last-updated">Last Updated: October 10, 2026</p>
 
-        <h2>1. Acceptance of Terms</h2>
-        <p>By registering, accessing, or using the Pitthugram platform ("Service"), provided by Pitthugram, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
+        <!-- 1. Introduction and Acceptance of Terms -->
+        <h2>1. Introduction and Acceptance of Terms</h2>
+        <p><strong>1.1</strong> These Terms of Service ("<strong>Terms</strong>") constitute a legally binding agreement between you and Pitthugram ("<strong>Pitthugram</strong>," "<strong>Company</strong>," "<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>") governing your access to and use of the Pitthugram platform, including all associated websites, subdomains, software, applications, tools, and services (collectively, the "<strong>Service</strong>").</p>
+        <p><strong>1.2</strong> The Service is made available to coaching institutes, educational centres, and similar organizations ("<strong>Institutes</strong>," "<strong>Clients</strong>," or "<strong>you</strong>," where the context refers to the contracting entity) and to individuals who access or use the Service on an Institute's behalf or at an Institute's instance, including without limitation institute owners, administrators, management, teaching staff, employees, students, and any other person who accesses, registers for, logs into, or otherwise interacts with the Service in any capacity (collectively, "<strong>Users</strong>").</p>
+        <p><strong>1.3 By accessing, registering for, logging into, or using the Service in any way, you acknowledge that you have read, understood, and agree to be bound by these Terms</strong>, as well as any policies referenced in or incorporated into these Terms, including our <a href="privacy-policy.html">Privacy Policy</a>. This acceptance applies regardless of whether you are an Institute's owner or management, a staff member, a student, or any other individual interacting with the Service, and regardless of whether you have been separately asked to click "I agree."</p>
+        <p><strong>1.4</strong> If you do not agree to these Terms, you must not access or use the Service.</p>
+        <p><strong>1.5</strong> If you are accessing or using the Service on behalf of an Institute, organization, or other entity, you represent that you have the authority to bind that entity to these Terms, and "you" will refer to both you individually and that entity.</p>
 
-        <h2>2. Description of Service</h2>
-        <p>Pitthugram provides digital assessment, test conduction, batch management, and analytics infrastructure for coaching institutes, educators, and educational institutions in India and abroad.</p>
+        <!-- 2. Future Changes to These Terms -->
+        <h2>2. Future Changes to These Terms</h2>
+        <p><strong>2.1</strong> Pitthugram reserves the right, at its sole discretion, to modify, amend, update, or add to these Terms at any time, for any reason, without requiring prior individual notice to each User.</p>
+        <p><strong>2.2</strong> Updated Terms take effect immediately upon being posted to the Service or the Pitthugram website, unless otherwise stated.</p>
+        <p><strong>2.3 It is the sole and ongoing responsibility of every User to review these Terms periodically.</strong> Pitthugram recommends checking this page at least once every week to stay informed of any changes.</p>
+        <p><strong>2.4</strong> Continued access to or use of the Service after any change to these Terms becomes effective constitutes binding acceptance of that change, whether or not the User has actually read or been separately notified of it. Failure to review these Terms does not exempt any User from being bound by them.</p>
 
-        <h2>3. Account Registration & Security</h2>
-        <p>When you start a free setup or register an account, you must provide accurate and complete information. You are responsible for maintaining the confidentiality of your login credentials and for all activities that occur under your account.</p>
+        <!-- 3. Eligibility -->
+        <h2>3. Eligibility</h2>
+        <p><strong>3.1</strong> The Service is intended for use by coaching institutes, educational organizations, their authorized staff, and their students, operating in a lawful educational context.</p>
+        <p><strong>3.2</strong> By using the Service, you represent that you have the legal capacity to enter into these Terms, and, where applicable, that any student data entered into the Service has been collected and is being processed with all necessary consents as described in our <a href="privacy-policy.html">Privacy Policy</a>.</p>
 
-        <h2>4. Acceptable Use</h2>
-        <p>You agree not to misuse the Service, including but not limited to:</p>
-        <ul>
-            <li>Attempting unauthorized access to system features, accounts, or databases.</li>
-            <li>Using automated bots, scrapers, or scripts to flood or bypass security checks.</li>
-            <li>Uploading illegal, harmful, infringing, or defamatory assessment content.</li>
+        <!-- 4. Description of the Service -->
+        <h2>4. Description of the Service</h2>
+        <p><strong>4.1</strong> Pitthugram provides a technology platform that enables coaching institutes to, among other things:</p>
+        <ul class="clause-list">
+            <li>(a) obtain a dedicated online presence (typically via a subdomain assigned by Pitthugram, or a custom domain where separately agreed);</li>
+            <li>(b) build, schedule, and administer tests and quizzes (multiple-choice and other formats);</li>
+            <li>(c) maintain a question bank organized by subject, chapter, and difficulty level;</li>
+            <li>(d) process and digitize scanned test papers using optical character recognition ("OCR") tools;</li>
+            <li>(e) generate performance reports and analytics for students and batches; and</li>
+            <li>(f) manage institute-level settings and oversight through an administrative dashboard.</li>
         </ul>
+        <p><strong>4.2</strong> Pitthugram may add, modify, suspend, or discontinue any feature or component of the Service at any time, with or without notice, at its sole discretion.</p>
+        <p><strong>4.3 Free Setup and Onboarding.</strong> Where Pitthugram offers a free setup or trial, this includes initial configuration of the Institute's instance by the Pitthugram team. Any timelines communicated for contact, onboarding, or go-live (including on the Pitthugram website) are estimates only and are not guaranteed delivery deadlines. Login credentials and onboarding communications are typically sent via email, and, where opted in, WhatsApp.</p>
 
-        <h2>5. Termination & Modifications</h2>
-        <p>We reserve the right to modify, suspend, or terminate access to the Service for any violation of these terms or at our reasonable discretion. We may update these Terms of Service from time to time by posting the updated version on our website.</p>
+        <!-- 5. Account Registration, Credentials, and Security -->
+        <h2>5. Account Registration, Credentials, and Security</h2>
+        <p><strong>5.1</strong> To use the Service, an Institute and its authorized Users will be provided with login credentials. These credentials may be system-generated and transmitted via email and/or WhatsApp.</p>
+        <p><strong>5.2</strong> Institutes and Users are responsible for maintaining the confidentiality of their login credentials and for all activity that occurs under their accounts, whether or not authorized.</p>
+        <p><strong>5.3</strong> Users must notify Pitthugram promptly of any known or suspected unauthorized access to, or use of, their account or credentials.</p>
+        <p><strong>5.4</strong> Pitthugram is not responsible for any loss or damage arising from a User's failure to safeguard their login credentials.</p>
 
-        <h2>6. Governing Law & Contact</h2>
-        <p>These terms are governed by the laws of India. For questions regarding these Terms of Service, contact us at:</p>
-        <p><strong>Pitthugram</strong><br>
-        Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, Uttar Pradesh 201301<br>
-        Email: <a href="mailto:support@pitthugram.com">support@pitthugram.com</a></p>
+        <!-- 6. Institute and User Responsibilities -->
+        <h2>6. Institute and User Responsibilities</h2>
+        <p><strong>6.1</strong> Institutes are solely responsible for:</p>
+        <ul class="clause-list">
+            <li>(a) the accuracy, legality, and appropriateness of all data entered into the Service, including student names, academic records, performance data, and any content uploaded (including scanned papers and question content);</li>
+            <li>(b) obtaining any consents required by applicable law from students, parents, or guardians prior to entering their personal data into the Service, as further described in our Privacy Policy;</li>
+            <li>(c) ensuring that all Users under the Institute's account (staff and students) are made aware of, and comply with, these Terms; and</li>
+            <li>(d) all fees associated with their subscription to the Service.</li>
+        </ul>
+        <p><strong>6.2</strong> Users agree not to:</p>
+        <ul class="clause-list">
+            <li>(a) use the Service for any unlawful purpose or in violation of any applicable law or regulation;</li>
+            <li>(b) attempt to gain unauthorized access to any part of the Service, other Institutes' data, or Pitthugram's systems;</li>
+            <li>(c) interfere with, disrupt, or place an unreasonable load on the Service's infrastructure;</li>
+            <li>(d) reverse-engineer, decompile, or attempt to extract the source code of the Service, except where permitted by law;</li>
+            <li>(e) upload or transmit any content that is unlawful, infringing, defamatory, obscene, or otherwise objectionable; or</li>
+            <li>(f) use any automated means (bots, scrapers, or similar) to access the Service without Pitthugram's prior written consent.</li>
+        </ul>
+        <p><strong>6.3</strong> Pitthugram reserves the right to investigate and take appropriate action against any User who violates this Section, including suspension or termination of access, with or without notice.</p>
+
+        <!-- 7. Fees, Billing, Service Availability, and No Refunds -->
+        <h2>7. Fees, Billing, Service Availability, and No Refunds</h2>
+        <p><strong>7.1 Fees.</strong> Fees payable for the Service are as communicated to and agreed with the Institute separately (e.g., at the time of signup, onboarding, or in a service/pricing agreement). Pitthugram reserves the right to change its fees prospectively, with reasonable notice to the Institute.</p>
+        <p><strong>7.2 Billing Cycle.</strong> Fees are billed on a recurring basis as agreed with the Institute (e.g., monthly), unless otherwise specified.</p>
+        <p><strong>7.3 Service Availability.</strong> Pitthugram will make reasonable efforts to keep the Service available, secure, and performing reliably. However, Pitthugram does not guarantee uninterrupted, error-free, or defect-free operation of the Service, and downtime, interruptions, bugs, or data-handling issues may occur from time to time.</p>
+        
+        <div class="highlight-clause">
+            <p><strong>7.4 No Refunds.</strong> Notwithstanding anything to the contrary, in the event of any downtime, service interruption, technical fault, bug, data issue, or any other problem arising from or attributable to Pitthugram's side, <strong>Pitthugram will not issue a refund under any circumstances.</strong> This applies irrespective of the duration, severity, or cause of such downtime or issue, and irrespective of any loss, inconvenience, or damage the Institute or its Users may claim to have suffered as a result.</p>
+            <p><strong>7.5 Sole Remedy — Prorated Discount.</strong> The sole and exclusive remedy available to an Institute in connection with any downtime or service issue attributable to Pitthugram is a discount calculated on an hourly, prorated basis for the verified duration of the downtime or issue, to be applied against the Institute's <strong>next</strong> billing cycle. For the avoidance of doubt: (a) no cash refunds will be issued; (b) no credit usable outside the immediately following billing cycle will be issued; and (c) no other form of compensation, make-good, or service credit will be provided.</p>
+        </div>
+
+        <p><strong>7.6</strong> By subscribing to or continuing to use the Service, the Institute and its Users acknowledge, accept, and agree to this allocation of risk as a fundamental condition of the Service being offered, including at the pricing at which it is offered.</p>
+        <p><strong>7.7</strong> Non-payment of fees when due may result in suspension or termination of access to the Service, in Pitthugram's discretion.</p>
+
+        <!-- 8. Intellectual Property -->
+        <h2>8. Intellectual Property</h2>
+        <p><strong>8.1</strong> The Service, including its software, design, text, graphics, logos, trademarks (including "Pitthugram"), and all underlying technology, is owned by or licensed to Pitthugram and is protected by applicable intellectual property laws. Nothing in these Terms grants any User ownership rights in the Service itself.</p>
+        <p><strong>8.2</strong> Subject to these Terms, Pitthugram grants each Institute and its authorized Users a limited, non-exclusive, non-transferable, revocable license to access and use the Service solely for the Institute's internal educational and administrative purposes.</p>
+        <p><strong>8.3</strong> As between the Institute and Pitthugram, the Institute retains ownership of the academic content, question banks, and student data it uploads or enters into the Service ("<strong>Institute Content</strong>"). The Institute grants Pitthugram a non-exclusive, worldwide license to host, store, process, reproduce, and display Institute Content solely as necessary to provide and operate the Service.</p>
+        <p><strong>8.4</strong> Users must not use Pitthugram's name, logo, or trademarks without prior written permission, except as necessary to use the Service as intended.</p>
+
+        <!-- 9. Data and Privacy -->
+        <h2>9. Data and Privacy</h2>
+        <p><strong>9.1</strong> Pitthugram's collection, use, and handling of personal information is described in our <a href="privacy-policy.html">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+        <p><strong>9.2</strong> Institutes are responsible for ensuring that any personal data of students or staff entered into the Service is collected and processed in accordance with applicable data protection laws, and that necessary notices and consents have been obtained prior to such data being entered into the Service.</p>
+
+        <!-- 10. Third-Party Services -->
+        <h2>10. Third-Party Services</h2>
+        <p><strong>10.1</strong> The Service may rely on or integrate with third-party tools and services (for example, communication services used to deliver login details or notifications). Pitthugram is not responsible for the availability, performance, or conduct of third-party services outside its direct control.</p>
+
+        <!-- 11. Disclaimers and Limitation of Liability -->
+        <h2>11. Disclaimers and Limitation of Liability</h2>
+        <p><strong>11.1 Disclaimer of Warranties.</strong> Except as expressly stated in these Terms, the Service is provided on an "as is" and "as available" basis, without warranties of any kind, whether express, implied, or statutory, including implied warranties of merchantability, fitness for a particular purpose, and non-infringement, to the maximum extent permitted by applicable law.</p>
+        <p><strong>11.2 Limitation of Liability.</strong> To the maximum extent permitted by applicable law, Pitthugram, its officers, employees, and affiliates shall not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for any loss of data, revenue, profits, goodwill, or business opportunity, arising out of or related to the use of, or inability to use, the Service, whether based in contract, tort, negligence, strict liability, or otherwise, even if advised of the possibility of such damages.</p>
+        <p><strong>11.3 Aggregate Cap.</strong> To the maximum extent permitted by applicable law, Pitthugram's total aggregate liability to an Institute or any User, for any and all claims arising out of or related to the Service, shall not exceed the value of the prorated discount described in Section 7.5, which the parties agree is a reasonable and sufficient remedy given the nature of the Service.</p>
+        <p><strong>11.4</strong> Nothing in these Terms is intended to exclude or limit liability that cannot be excluded or limited under applicable law.</p>
+
+        <!-- 12. Indemnification -->
+        <h2>12. Indemnification</h2>
+        <p><strong>12.1</strong> The Institute agrees to indemnify, defend, and hold harmless Pitthugram and its officers, employees, and affiliates from and against any claims, damages, liabilities, costs, and expenses (including reasonable legal fees) arising out of or related to: (a) the Institute's or its Users' breach of these Terms; (b) Institute Content, including any lack of required consents for student data; or (c) the Institute's or its Users' violation of applicable law.</p>
+
+        <!-- 13. Suspension and Termination -->
+        <h2>13. Suspension and Termination</h2>
+        <p><strong>13.1</strong> Pitthugram may suspend or terminate an Institute's or User's access to the Service, in whole or in part, at its discretion, including for breach of these Terms, non-payment, suspected misuse, or legal or security reasons, with or without prior notice.</p>
+        <p><strong>13.2</strong> An Institute may stop using the Service at any time; however, no refunds will be issued for fees already paid, except as otherwise expressly agreed in writing.</p>
+        <p><strong>13.3</strong> Provisions of these Terms that by their nature should survive termination (including Sections 7, 8, 9, 11, 12, and 15) will survive.</p>
+
+        <!-- 14. Force Majeure -->
+        <h2>14. Force Majeure</h2>
+        <p><strong>14.1</strong> Pitthugram will not be liable for any failure or delay in performance resulting from causes beyond its reasonable control, including but not limited to acts of God, natural disasters, war, terrorism, labor disputes, internet or telecommunications failures, power outages, or governmental action. For clarity, this Section does not expand any refund rights beyond those set out in Section 7.</p>
+
+        <!-- 15. Governing Law and Dispute Resolution -->
+        <h2>15. Governing Law and Dispute Resolution</h2>
+        <p><strong>15.1</strong> These Terms shall be governed by and construed in accordance with the laws of India, without regard to its conflict-of-laws principles.</p>
+        <p><strong>15.2</strong> Subject to Section 15.3, the courts at Noida / Gautam Buddh Nagar, Uttar Pradesh shall have exclusive jurisdiction over any disputes arising out of or in connection with these Terms.</p>
+        <p><strong>15.3</strong> Pitthugram may, at its discretion, pursue urgent injunctive or equitable relief in any court of competent jurisdiction.</p>
+
+        <!-- 16. Miscellaneous -->
+        <h2>16. Miscellaneous</h2>
+        <p><strong>16.1 Entire Agreement.</strong> These Terms, together with the <a href="privacy-policy.html">Privacy Policy</a> and any order form or agreement expressly referencing these Terms, constitute the entire agreement between the parties regarding the Service and supersede all prior agreements on the subject.</p>
+        <p><strong>16.2 Severability.</strong> If any provision of these Terms is held invalid or unenforceable, that provision will be limited or eliminated to the minimum extent necessary, and the remaining provisions will remain in full force and effect.</p>
+        <p><strong>16.3 No Waiver.</strong> Pitthugram's failure to enforce any provision of these Terms shall not be deemed a waiver of that provision or any other provision.</p>
+        <p><strong>16.4 Assignment.</strong> The Institute may not assign or transfer its rights or obligations under these Terms without Pitthugram's prior written consent. Pitthugram may assign these Terms in connection with a merger, acquisition, or sale of assets.</p>
+        <p><strong>16.5 Notices.</strong> Notices to Pitthugram should be sent to <a href="mailto:support@pitthugram.com">support@pitthugram.com</a> or delivered to: Pitthugram, Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, Uttar Pradesh 201301. Notices to Users may be sent via the email address or phone number/WhatsApp number associated with their account.</p>
+        <p><strong>16.6 Contact.</strong> Questions about these Terms may be directed to <a href="mailto:support@pitthugram.com">support@pitthugram.com</a>.</p>
     </div>
 </main>
 
+<!-- ── Footer ── -->
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
@@ -121,6 +303,12 @@
                     <img src="logo.png" alt="Pitthugram" style="height:36px;">
                 </a>
                 <p>The technology backbone for India's best coaching institutes.</p>
+                <div class="social-links">
+                    <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>Company</h4>
@@ -134,6 +322,23 @@
         </div>
     </div>
 </footer>
+
+<script>
+// Mobile navigation toggle
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const mobileClose = document.getElementById('mobileClose');
+
+if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+}
+if (mobileClose && mobileNav) {
+    mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+}
+if (mobileNav) {
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+}
+</script>
 
 </body>
 </html>
