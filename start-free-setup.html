@@ -267,6 +267,12 @@
             <p class="subtitle">Fill in your details — we'll take it from here.</p>
 
             <div id="setupForm">
+                <!-- Honeypot bot protection field (hidden off-screen via CSS, not display:none) -->
+                <div style="position: absolute; left: -9999px; top: -9999px; width: 0; height: 0; opacity: 0; pointer-events: none; overflow: hidden;" aria-hidden="true">
+                    <label for="website">Website (Leave blank)</label>
+                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" value="">
+                </div>
+
                 <p class="required-note">All fields marked <span>*</span> are mandatory.</p>
 
                 <div class="form-group">
@@ -318,6 +324,10 @@
                     Also send my login on WhatsApp
                 </label>
 
+                <!-- Cloudflare Turnstile Bot Protection (Replace sitekey with production key from Cloudflare Dashboard) -->
+                <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" style="margin-bottom:1.25rem;display:flex;justify-content:center;"></div>
+
                 <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
                     Request Free Setup <i class="ph ph-arrow-right"></i>
                 </button>
@@ -329,7 +339,7 @@
                     <i class="ph-fill ph-check"></i>
                 </div>
                 <h3>You're on the list!</h3>
-                <p>Thank you. Our team will contact you within <strong>24 hours</strong> to complete your free setup.</p>
+                <p>You're on the list! Check your email in the next 5 minutes for your login details. Didn't get it? Check your spam folder, or message us on WhatsApp. Our team will also reach out within 24 hours to finish setting up your institute.</p>
                 <a href="#" id="waButton" target="_blank" class="setup-submit" style="display:none;margin-top:1rem;text-decoration:none;justify-content:center;align-items:center;gap:0.5rem;">
                     <i class="ph-fill ph-whatsapp-logo"></i> Message us on WhatsApp
                 </a>
@@ -365,8 +375,8 @@
             <div class="footer-col">
                 <h4>Company</h4>
                 <a href="index.html#about">About Us</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -422,12 +432,23 @@ async function handleSetupSubmit() {
     const institute = document.getElementById('institute').value.trim();
     const email     = document.getElementById('email').value.trim();
     const phone     = document.getElementById('phone').value.trim();
+    const honeypot  = document.getElementById('website')?.value || '';
+
+    // If bot filled the hidden honeypot, fake success silently without hitting backend
+    if (honeypot) {
+        document.getElementById('setupForm').style.display = 'none';
+        document.getElementById('successState').style.display = 'block';
+        document.getElementById('backLink').style.display = 'none';
+        return;
+    }
 
     if (!name) { alert('Please enter your name.'); document.getElementById('name').focus(); return; }
     if (!institute) { alert('Please enter your institute name.'); document.getElementById('institute').focus(); return; }
     if (!email) { alert('Please enter your email address.'); document.getElementById('email').focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { alert('Please enter a valid email address.'); document.getElementById('email').focus(); return; }
     if (!phone) { alert('Please enter your phone number.'); document.getElementById('phone').focus(); return; }
+
+    const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value || '';
 
     const btn = document.getElementById('setupSubmit');
     const errEl = document.getElementById('submitError');
@@ -439,13 +460,24 @@ async function handleSetupSubmit() {
         const res = await fetch('https://awsn8n.pitthugram.com/webhook/free-setup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, institute, email, phone })
+            body: JSON.stringify({
+                name,
+                institute,
+                email,
+                phone,
+                website: honeypot,
+                'cf-turnstile-response': turnstileToken,
+                turnstile_token: turnstileToken
+            })
         });
-        if (!res.ok) throw new Error('Server error ' + res.status);
+        if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.message || ('Server error ' + res.status));
+        }
     } catch (err) {
         btn.innerHTML = 'Request Free Setup <i class="ph ph-arrow-right"></i>';
         btn.disabled = false;
-        errEl.textContent = 'Could not reach our server. Please check your connection and try again.';
+        errEl.textContent = err.message || 'Could not reach our server. Please check your connection and try again.';
         errEl.style.display = 'block';
         return;
     }
