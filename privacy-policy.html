@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy — Pitthugram</title>
-    <meta name="description" content="Privacy Policy for Pitthugram coaching platform.">
+    <meta name="description" content="Privacy Policy governing the collection, use, and protection of personal data on the Pitthugram platform under India's DPDP Act.">
     <link rel="icon" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,18 +18,26 @@
             background: var(--bg-base);
         }
         .legal-container {
-            max-width: 800px;
+            max-width: 860px;
             margin: 0 auto;
             background: var(--bg-surface);
             border: 1px solid var(--border);
             border-radius: var(--radius-xl);
-            padding: 3rem 2.5rem;
+            padding: 3.5rem 3rem;
             box-shadow: var(--shadow-lg);
         }
         .legal-container h1 {
             font-size: 2.25rem;
             font-weight: 800;
+            line-height: 1.2;
             margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        .legal-container .subheading {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.25rem;
         }
         .legal-container .last-updated {
             color: var(--text-muted);
@@ -41,28 +49,59 @@
         .legal-container h2 {
             font-size: 1.35rem;
             font-weight: 700;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        .legal-container h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
             margin-bottom: 0.75rem;
             color: var(--text-primary);
         }
-        .legal-container p, .legal-container li {
+        .legal-container p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.7;
+            line-height: 1.75;
             margin-bottom: 1rem;
+        }
+        .legal-container strong {
+            color: var(--text-primary);
         }
         .legal-container ul {
             padding-left: 1.5rem;
             margin-bottom: 1.25rem;
         }
+        .legal-container li {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+        .highlight-clause {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin: 1.25rem 0;
+        }
         .legal-container a {
             color: var(--primary);
             text-decoration: underline;
+        }
+        @media (max-width: 640px) {
+            .legal-page { padding: 3rem 1rem 2rem; }
+            .legal-container { padding: 2rem 1.5rem; }
+            .legal-container h1 { font-size: 1.85rem; }
         }
     </style>
 </head>
 <body>
 
+<!-- ── Navbar ── -->
 <header class="navbar">
     <div class="container nav-inner">
         <a href="index.html" class="logo">
@@ -77,45 +116,176 @@
         <div class="nav-actions">
             <a href="start-free-setup.html" class="btn btn-primary">Start Free Setup</a>
         </div>
+        <button class="hamburger" id="hamburger" aria-label="Open menu">
+            <i class="ph ph-list"></i>
+        </button>
     </div>
 </header>
 
+<!-- ── Mobile Nav ── -->
+<div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+        <a href="index.html" class="logo"><img src="logo.png" alt="Pitthugram" style="height:34px;"></a>
+        <button class="mobile-close" id="mobileClose"><i class="ph ph-x"></i></button>
+    </div>
+    <nav class="mobile-nav-links">
+        <a href="index.html#how-it-works">How it Works</a>
+        <a href="index.html#benefits">Benefits</a>
+        <a href="index.html#pricing">Pricing</a>
+        <a href="index.html#about">About</a>
+    </nav>
+    <div class="mobile-nav-actions">
+        <a href="start-free-setup.html" class="btn btn-primary" style="justify-content:center;">Start Free Setup</a>
+    </div>
+</div>
+
+<!-- ── Main Content ── -->
 <main class="legal-page">
     <div class="legal-container">
+        <div class="subheading">Pitthugram</div>
         <h1>Privacy Policy</h1>
-        <p class="last-updated">Last updated: October 2026</p>
+        <p class="last-updated">Last Updated: October 10, 2026</p>
 
-        <h2>1. Overview</h2>
-        <p>Pitthugram ("we", "our", or "us") respects your privacy and is committed to protecting the personal information of our users, including coaching institute owners, teachers, and students. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our platform services.</p>
+        <!-- 1. Introduction and Scope -->
+        <h2>1. Introduction and Scope</h2>
+        <p><strong>1.1</strong> Pitthugram ("<strong>Pitthugram</strong>," "<strong>we</strong>," "<strong>us</strong>," or "<strong>our</strong>") provides a technology platform that enables coaching institutes to establish an online presence, administer tests and assessments, manage question banks, process scanned papers, and generate academic reports and analytics (the "<strong>Service</strong>"), as further described in our <a href="terms-of-service.html">Terms of Service</a>.</p>
+        <p><strong>1.2</strong> This Privacy Policy explains what personal information we collect, how and why we collect it, how we use and share it, how long we retain it, and the rights and choices available to individuals whose information we process.</p>
+        <p><strong>1.3</strong> This Policy applies to coaching institutes and their representatives ("<strong>Institutes</strong>"), institute staff and teachers, students, and any other individual who provides personal information to us or whose personal information is processed through the Service (collectively, "<strong>you</strong>," "<strong>User</strong>," or, where referring to the data protection framework under Indian law, "<strong>Data Principal</strong>").</p>
+        <p><strong>1.4</strong> By accessing or using the Service, or by providing personal information to us, you acknowledge that you have read and understood this Privacy Policy. Where consent is the applicable legal basis for processing (for example, processing a child's personal data as described in Section 7), that consent is obtained separately as required by law.</p>
 
-        <h2>2. Information We Collect</h2>
-        <p>We collect information that you provide directly to us when you register for a free setup, request a trial, create an account, or communicate with our support team:</p>
+        <!-- 2. Definitions -->
+        <h2>2. Definitions</h2>
         <ul>
-            <li><strong>Contact Information:</strong> Name, email address, phone number, and coaching institute name.</li>
-            <li><strong>Account & Academic Data:</strong> Student rosters, batch configurations, exam schedules, and MCQ assessments created or administered through our platform.</li>
-            <li><strong>Technical & Usage Data:</strong> IP address, browser type, device information, and interaction logs collected for security and operational integrity.</li>
+            <li><strong>"Personal Information"</strong> or <strong>"Personal Data"</strong> means any information relating to an identified or identifiable natural person.</li>
+            <li><strong>"Institute Content"</strong> means academic content, question banks, student records, and related data that an Institute or its staff upload, enter, or generate through the Service.</li>
+            <li><strong>"Processing"</strong> means any operation performed on Personal Information, including collection, storage, use, disclosure, or deletion.</li>
+            <li><strong>"Data Fiduciary"</strong> and <strong>"Data Principal"</strong> carry the meanings given to them under the Digital Personal Data Protection Act, 2023 ("DPDP Act") — broadly, the entity that determines the purpose and means of processing, and the individual to whom the personal data relates, respectively. Depending on the specific data at issue, Pitthugram and the Institute may each act as a Data Fiduciary, as described further in Section 6.</li>
         </ul>
 
-        <h2>3. How We Use Your Information</h2>
-        <p>We use the collected information for the following business purposes:</p>
+        <!-- 3. Information We Collect -->
+        <h2>3. Information We Collect</h2>
+
+        <h3>3.1 Information Provided Directly</h3>
         <ul>
-            <li>To provision and administer your coaching institute's learning portal and assessment tools.</li>
-            <li>To deliver login credentials, transactional notices, and system alerts via email and WhatsApp.</li>
-            <li>To prevent fraud, automated abuse, and spam through verification tools (including Cloudflare Turnstile).</li>
-            <li>To provide customer support and technical troubleshooting.</li>
+            <li><strong>Contact and account information:</strong> name, institute/organization name, email address, and phone number, submitted when an Institute requests setup, registers, or otherwise signs up for the Service.</li>
+            <li><strong>Login credentials:</strong> account credentials generated for institute staff to access the Service, delivered via email and, where opted in, WhatsApp.</li>
+            <li><strong>Academic content and Institute Content:</strong> questions, answer keys, test papers, uploaded documents or images (including scanned papers processed using optical character recognition), and course, subject, and chapter data, entered by Institute staff.</li>
+            <li><strong>Student records:</strong> names, class or batch assignment, attempt history, scores, and other academic performance data entered by Institute staff for the purpose of administering assessments and generating reports.</li>
+            <li><strong>Communications:</strong> any information you provide when you contact us via email, WhatsApp, or other support channels.</li>
         </ul>
 
-        <h2>4. Data Protection & Sharing</h2>
-        <p>We do not sell, rent, or trade your personal data. We only share information with trusted infrastructure providers (such as hosting, database, and messaging partners) strictly necessary to deliver our services, and when required by law.</p>
+        <h3>3.2 Information Collected Automatically</h3>
+        <ul>
+            <li><strong>Technical and usage data:</strong> IP address, browser type, device information, pages visited, actions taken within the Service, and similar interaction logs, collected for security, fraud prevention, and service-improvement purposes.</li>
+            <li><strong>Bot and abuse prevention:</strong> as part of operating the Service, we use automated verification tools (such as Cloudflare Turnstile) to detect and prevent automated abuse of forms on our website. These tools may process limited technical data (such as IP address and browser signals) as part of that verification.</li>
+        </ul>
 
-        <h2>5. Your Rights & Contact</h2>
-        <p>You have the right to access, rectify, or request deletion of your personal data. For any questions or privacy inquiries, contact us at:</p>
-        <p><strong>Pitthugram</strong><br>
-        Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, Uttar Pradesh 201301<br>
-        Email: <a href="mailto:support@pitthugram.com">support@pitthugram.com</a></p>
+        <h3>3.3 Cookies and Similar Technologies</h3>
+        <p>We and our service providers may use cookies, local storage, and similar technologies to operate the website and Service, remember preferences, and understand usage patterns. Where required by applicable law, we will seek consent for non-essential cookies through an appropriate mechanism.</p>
+
+        <!-- 4. Legal Basis and Purpose for Processing -->
+        <h2>4. Legal Basis and Purpose for Processing</h2>
+        <p>We process Personal Information on one or more of the following bases, as applicable:</p>
+        <ul>
+            <li>(a) performance of a contract with the Institute;</li>
+            <li>(b) consent, including the consent of an Institute, parent, or lawful guardian where required for a child's data (see Section 7);</li>
+            <li>(c) compliance with a legal obligation; and</li>
+            <li>(d) our legitimate interests in operating, securing, and improving the Service, provided those interests do not override your rights.</li>
+        </ul>
+
+        <!-- 5. How We Use Information -->
+        <h2>5. How We Use Information</h2>
+        <p>We use the information described in Section 3 to:</p>
+        <ul>
+            <li>provision, configure, and administer an Institute's instance of the Service;</li>
+            <li>deliver login credentials and transactional, account-related, and support communications, by email and, where opted in, WhatsApp;</li>
+            <li>operate test-scheduling, question-bank, paper-review (including OCR), and reporting features;</li>
+            <li>prevent fraud, spam, and automated abuse of our forms and systems;</li>
+            <li>provide customer support and technical troubleshooting;</li>
+            <li>maintain the security and integrity of the Service;</li>
+            <li>comply with applicable law and enforce our <a href="terms-of-service.html">Terms of Service</a>; and</li>
+            <li>communicate changes to this Privacy Policy or our Terms of Service.</li>
+        </ul>
+        <p><strong>We do not use Institute Content or student data to train unrelated third-party products, and we do not sell Personal Information.</strong></p>
+
+        <!-- 6. How We Share Information; Roles of Institute and Pitthugram -->
+        <h2>6. How We Share Information; Roles of Institute and Pitthugram</h2>
+        <p><strong>6.1</strong> We do not sell, rent, or trade Personal Information.</p>
+        <p><strong>6.2</strong> We may share Personal Information with:</p>
+        <ul>
+            <li><strong>Service providers</strong> who help us operate the Service (for example, hosting, email and WhatsApp delivery, bot/abuse-prevention, and analytics providers), bound by confidentiality and data-processing obligations;</li>
+            <li><strong>Legal and safety authorities</strong>, where required by law, legal process, or to protect the rights, property, or safety of Pitthugram, our Users, or others;</li>
+            <li><strong>A successor entity</strong>, in connection with a merger, acquisition, or sale of assets, subject to this Policy or a substantially similar one; and</li>
+            <li><strong>Any party you direct us to</strong>, with your consent.</li>
+        </ul>
+        <p><strong>6.3 Roles.</strong> As between Pitthugram and an Institute, the Institute determines what student and academic data is entered into the Service and for what purpose, and is responsible for ensuring it has a lawful basis (including, where applicable, verifiable consent) to provide that data to us. Pitthugram processes such data on the Institute's behalf and in accordance with this Policy and the Terms of Service to operate the Service.</p>
+
+        <!-- 7. Children's and Students' Data -->
+        <h2>7. Children's and Students' Data</h2>
+        <div class="highlight-clause">
+            <p><strong>7.1</strong> Some Users of the Service, specifically students, may be under the age of 18 ("<strong>children</strong>," as defined under the DPDP Act and applicable Indian law).</p>
+            <p><strong>7.2 Institute Responsibility.</strong> The Institute is solely responsible for obtaining any verifiable consent required by applicable law from a child's parent or lawful guardian before entering that child's Personal Information into the Service, and for ensuring that its own notice and consent practices toward students and parents meet applicable legal requirements.</p>
+            <p><strong>7.3 Our Role.</strong> Pitthugram processes student data supplied by an Institute solely to provide the Service to that Institute (for example, to schedule tests, record scores, and generate reports) and does not independently collect children's Personal Information directly from students for marketing or other unrelated purposes.</p>
+            <p><strong>7.4</strong> We do not knowingly permit the use of children's Personal Information for tracking, behavioral monitoring, or targeted advertising.</p>
+            <p><strong>7.5</strong> A parent, lawful guardian, or Institute may contact us using the details in Section 13 to raise questions about a student's data processed through the Service; requests to access, correct, or delete such data should ordinarily be directed to the relevant Institute in the first instance, as the Institute controls the underlying records, with Pitthugram providing operational support as needed.</p>
+        </div>
+
+        <!-- 8. Data Retention -->
+        <h2>8. Data Retention</h2>
+        <p>We retain Personal Information for as long as the relevant Institute's account is active, and for a reasonable period afterward as needed for legal, accounting, security, or legitimate business purposes, after which it is deleted or anonymized, except where longer retention is required by law.</p>
+
+        <!-- 9. Data Security -->
+        <h2>9. Data Security</h2>
+        <p>We implement reasonable technical and organizational measures designed to protect Personal Information against unauthorized access, alteration, disclosure, or destruction, including the use of automated bot/abuse-prevention tools on public-facing forms. No method of transmission or storage is completely secure, and we cannot guarantee absolute security.</p>
+
+        <!-- 10. Data Storage and Transfers -->
+        <h2>10. Data Storage and Transfers</h2>
+        <p>Personal Information may be stored and processed on servers located in India or, where a service provider requires it, outside India. Where Personal Information is transferred outside India, we take steps intended to ensure it continues to receive a level of protection consistent with this Policy and applicable law.</p>
+
+        <!-- 11. Your Rights and Choices -->
+        <h2>11. Your Rights and Choices</h2>
+        <p>Subject to applicable law, you (or, in the case of a child, your parent or lawful guardian, or the Institute acting on your behalf) may have the right to:</p>
+        <ul>
+            <li>access the Personal Information we hold about you;</li>
+            <li>request correction of inaccurate or incomplete information;</li>
+            <li>request erasure of your Personal Information, subject to our legal and operational requirements;</li>
+            <li>withdraw consent where processing is based on consent, without affecting the lawfulness of processing before withdrawal;</li>
+            <li>opt out of non-essential communications, including WhatsApp notifications; and</li>
+            <li>lodge a grievance with us (Section 13) or, where applicable, with the competent data protection authority.</li>
+        </ul>
+        <p>We may need to verify your identity, or the identity of the Institute acting on your behalf, before acting on a request.</p>
+
+        <!-- 12. Third-Party Links and Services -->
+        <h2>12. Third-Party Links and Services</h2>
+        <p>The Service and our website may contain links to, or integrate with, third-party websites or services (for example, WhatsApp, or bot-verification providers). This Policy does not apply to those third parties, and we encourage you to review their own privacy practices.</p>
+
+        <!-- 13. Grievance Officer and Contact Information -->
+        <h2>13. Grievance Officer and Contact Information</h2>
+        <p>In accordance with applicable Indian law (including the DPDP Act), grievances or questions relating to this Privacy Policy or the processing of your Personal Information may be directed to:</p>
+        <div class="highlight-clause">
+            <p><strong>Grievance Officer:</strong> Grievance Officer, Pitthugram<br>
+            <strong>Email:</strong> <a href="mailto:support@pitthugram.com">support@pitthugram.com</a><br>
+            <strong>Address:</strong> Pitthugram, Assotech Business Cresterra, Upper Ground Floor, Tower 2, Plot No 22, Sector 135, Noida, Uttar Pradesh, India</p>
+        </div>
+        <p>We will endeavor to acknowledge and address grievances within the timelines prescribed by applicable law.</p>
+
+        <!-- 14. Changes to This Policy -->
+        <h2>14. Changes to This Policy</h2>
+        <p><strong>14.1</strong> We may update this Privacy Policy from time to time, at our discretion, to reflect changes in our practices, the Service, or applicable law.</p>
+        <p><strong>14.2</strong> Updated versions take effect upon posting, and the "Last Updated" date at the top of this Policy will be revised accordingly.</p>
+        <p><strong>14.3</strong> As with our Terms of Service, it is each User's responsibility to review this Policy periodically — we recommend checking it at least once a week. Continued use of the Service after a change takes effect constitutes acceptance of the revised Policy.</p>
+
+        <!-- 15. Governing Law -->
+        <h2>15. Governing Law</h2>
+        <p>This Privacy Policy is governed by the laws of India. Disputes relating to this Policy are subject to the jurisdiction described in our <a href="terms-of-service.html">Terms of Service</a> (Section 15 — courts at Noida / Gautam Buddh Nagar, Uttar Pradesh).</p>
+
+        <!-- 16. Relationship to Terms of Service -->
+        <h2>16. Relationship to Terms of Service</h2>
+        <p>This Privacy Policy is incorporated into, and should be read together with, our <a href="terms-of-service.html">Terms of Service</a>. In the event of a direct conflict between this Policy and the Terms of Service on a matter specifically addressed by both, this Policy governs with respect to the handling of Personal Information, and the Terms of Service govern all other matters.</p>
     </div>
 </main>
 
+<!-- ── Footer ── -->
 <footer class="footer">
     <div class="container">
         <div class="footer-grid">
@@ -124,6 +294,12 @@
                     <img src="logo.png" alt="Pitthugram" style="height:36px;">
                 </a>
                 <p>The technology backbone for India's best coaching institutes.</p>
+                <div class="social-links">
+                    <a href="#"><i class="ph-fill ph-facebook-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-instagram-logo"></i></a>
+                    <a href="#"><i class="ph-fill ph-linkedin-logo"></i></a>
+                </div>
             </div>
             <div class="footer-col">
                 <h4>Company</h4>
@@ -137,6 +313,23 @@
         </div>
     </div>
 </footer>
+
+<script>
+// Mobile navigation toggle
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const mobileClose = document.getElementById('mobileClose');
+
+if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+}
+if (mobileClose && mobileNav) {
+    mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+}
+if (mobileNav) {
+    mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+}
+</script>
 
 </body>
 </html>
