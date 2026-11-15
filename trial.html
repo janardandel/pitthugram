@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <style>
         .setup-page {
             min-height: calc(100vh - 72px);
@@ -380,8 +381,7 @@
                     </div>
                 </div>
 
-                <!-- Cloudflare Turnstile Bot Protection (Replace sitekey with production key from Cloudflare Dashboard) -->
-                <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+                <!-- Cloudflare Turnstile Bot Protection -->
                 <div class="cf-turnstile" data-sitekey="0x4AAAAAAGBA_eSJ8DqejpT0" data-theme="dark" style="margin-bottom:1.25rem;display:flex;justify-content:center;"></div>
 
                 <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
@@ -511,6 +511,13 @@ async function handleSetupSubmit() {
 
     const btn = document.getElementById('setupSubmit');
     const errEl = document.getElementById('submitError');
+
+    if (!turnstileToken) {
+        errEl.textContent = 'Please wait for the bot verification check to complete (or check that the verification box is visible) before submitting.';
+        errEl.style.display = 'block';
+        return;
+    }
+
     btn.innerHTML = '<i class="ph ph-spinner-gap"></i> Submitting...';
     btn.disabled = true;
     errEl.style.display = 'none';
