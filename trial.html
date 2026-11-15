@@ -380,14 +380,9 @@
                     </div>
                 </div>
 
-                <label class="wa-optin" for="whatsappOptIn" style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1.25rem;font-size:0.9rem;color:var(--text-secondary,#555);cursor:pointer;">
-                    <input type="checkbox" id="whatsappOptIn" style="width:auto;margin:0;">
-                    Also send my login on WhatsApp
-                </label>
-
                 <!-- Cloudflare Turnstile Bot Protection (Replace sitekey with production key from Cloudflare Dashboard) -->
                 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-                <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark" style="margin-bottom:1.25rem;display:flex;justify-content:center;"></div>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAGBA_eSJ8DqejpT0" data-theme="dark" style="margin-bottom:1.25rem;display:flex;justify-content:center;"></div>
 
                 <button type="button" class="setup-submit" id="setupSubmit" onclick="handleSetupSubmit()">
                     Request Free Setup <i class="ph ph-arrow-right"></i>
@@ -407,11 +402,8 @@
                 <div class="check-circle">
                     <i class="ph-fill ph-check"></i>
                 </div>
-                <h3>You're on the list!</h3>
-                <p>You're on the list! Check your email in the next 5 minutes for your login details. Didn't get it? Check your spam folder, or <a href="https://wa.me/919717183064?text=CREDS" target="_blank" style="color:var(--primary);text-decoration:underline;font-weight:600;">message us on WhatsApp</a>. Our team will also reach out within 24 hours to finish setting up your institute.</p>
-                <a href="#" id="waButton" target="_blank" class="setup-submit" style="display:none;margin-top:1rem;text-decoration:none;justify-content:center;align-items:center;gap:0.5rem;">
-                    <i class="ph-fill ph-whatsapp-logo"></i> Message us on WhatsApp
-                </a>
+                <h3 id="successTitle">You're on the list!</h3>
+                <p id="successText">Thanks! We've emailed you a confirmation (check your spam folder if you don't see it). Our team is setting up your institute and will contact you within 24 hours with your login details. Questions? <a href="https://wa.me/919717183064" target="_blank" style="color:var(--primary);text-decoration:underline;font-weight:600;">Message us on WhatsApp</a>.</p>
                 <a href="index.html" class="back-link" style="justify-content:center;margin-top:1.5rem;display:inline-flex;">
                     <i class="ph ph-arrow-left"></i> Back to home
                 </a>
@@ -524,7 +516,7 @@ async function handleSetupSubmit() {
     errEl.style.display = 'none';
 
     try {
-        const res = await fetch('https://awsn8n.pitthugram.com/webhook/free-setup', {
+        const res = await fetch('/api/free-setup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -537,9 +529,13 @@ async function handleSetupSubmit() {
                 turnstile_token: turnstileToken
             })
         });
+        const data = await res.json().catch(() => ({}));
         if (!res.ok) {
-            const errData = await res.json().catch(() => ({}));
-            throw new Error(errData.message || ('Server error ' + res.status));
+            throw new Error(data.message || ('Server error ' + res.status));
+        }
+        if (data.status === 'exists') {
+            document.getElementById('successTitle').textContent = 'You already have a trial request';
+            document.getElementById('successText').innerHTML = 'We already have a request from this email. Our team will contact you within 24 hours. Need help sooner? <a href="https://wa.me/919717183064" target="_blank" style="color:var(--primary);text-decoration:underline;font-weight:600;">Message us on WhatsApp</a>.';
         }
     } catch (err) {
         btn.innerHTML = 'Request Free Setup <i class="ph ph-arrow-right"></i>';
@@ -552,15 +548,6 @@ async function handleSetupSubmit() {
     document.getElementById('setupForm').style.display = 'none';
     document.getElementById('successState').style.display = 'block';
     document.getElementById('backLink').style.display = 'none';
-
-    if (document.getElementById('whatsappOptIn').checked) {
-        const waPhone = '919717183064'; // Pitthugram WhatsApp number, country code + number, digits only
-        const digits = phone.replace(/\D/g, '');
-        const msg = encodeURIComponent('CREDS ' + digits);
-        const waBtn = document.getElementById('waButton');
-        waBtn.href = 'https://wa.me/' + waPhone + '?text=' + msg;
-        waBtn.style.display = 'inline-flex';
-    }
 }
 </script>
 </body>
